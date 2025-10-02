@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古文模擬題組練習</title>
+    <!-- 載入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 設定字體為 Inter (常用現代無襯線字體) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        /* 隱藏答案區塊 */
+        #answer-key-content {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+        }
+        #answer-key-content.expanded {
+            max-height: 1000px; /* 足夠大的數值 */
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .radio-label {
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+        /* 選擇題選項 Hover 效果 */
+        .radio-label:hover {
+            background-color: #374151; /* gray-700 for hover */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">
+                古文模擬題組練習
+            </h1>
+            <p class="text-md text-gray-400 mt-2">
+                模仿《曹丕〈與吳質書〉》與《周幽王褒姒烽火戲諸侯》的題組風格
+            </p>
+        </header>
+
+        <!-- 模擬文章區塊 -->
+        <section class="mb-8 p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700">
+            <h2 class="text-xl font-bold mb-4 text-blue-300">📖 模擬題組（自擬）</h2>
+            <div class="text-lg leading-relaxed text-gray-300 border-l-4 border-blue-500 pl-4 py-2 italic">
+                昔日陳國大夫辭官歸田，與故人書曰：「吾生平志在<span class="text-yellow-400 font-semibold">高山流水</span>，欲與知己<span class="text-yellow-400 font-semibold">同聲共鳴</span>。然時運不齊，未逢伯樂，徒使寸心寂寥。今見朝廷浮華，世人逐利，心知難與同調。雖然，若能<span class="text-yellow-400 font-semibold">秉燭夜遊</span>，與良朋對酒言詩，斯亦足慰平生矣。」
+            </div>
+        </section>
+
+        <!-- 選擇題表單 -->
+        <form id="quiz-form" class="space-y-6 mb-10">
+
+            <!-- 第 1 題 -->
+            <div class="question-block p-5 bg-gray-800 rounded-lg shadow-xl">
+                <h3 class="text-lg font-semibold mb-3 text-white">第1題：關於「志在高山流水，欲與知己同聲共鳴」，最符合的成語是：</h3>
+                <div class="space-y-2 text-gray-300">
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q1" value="A" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(A) 琴瑟和鳴</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q1" value="B" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(B) 背道而馳</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q1" value="C" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(C) 曲高和寡</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q1" value="D" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(D) 口蜜腹劍</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第 2 題 -->
+            <div class="question-block p-5 bg-gray-800 rounded-lg shadow-xl">
+                <h3 class="text-lg font-semibold mb-3 text-white">第2題：「今見朝廷浮華，世人逐利，心知難與同調」最能表達其心境的選項是：</h3>
+                <div class="space-y-2 text-gray-300">
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q2" value="A" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(A) 慨嘆世風日下，難得真誠之交</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q2" value="B" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(B) 哀嘆國勢衰敗，無力力挽狂瀾</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q2" value="C" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(C) 厭惡兵戎相見，渴求天下太平</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q2" value="D" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(D) 怨恨朝廷任人唯親，仕途不公</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第 3 題 -->
+            <div class="question-block p-5 bg-gray-800 rounded-lg shadow-xl">
+                <h3 class="text-lg font-semibold mb-3 text-white">第3題：本文最核心的主旨應是：</h3>
+                <div class="space-y-2 text-gray-300">
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q3" value="A" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(A) 勸人珍惜光陰，及時行樂</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q3" value="B" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(B) 抱怨懷才不遇，無法報國</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q3" value="C" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(C) 批判朝廷黑暗，民生困苦</span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-md radio-label">
+                        <input type="radio" name="q3" value="D" class="form-radio h-4 w-4 text-blue-500 bg-gray-700 border-gray-600 focus:ring-blue-500">
+                        <span class="ml-3">(D) 講述友情可貴，勝於功名</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4 pt-4">
+                <button type="button" onclick="checkAnswers()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transform transition duration-200 hover:scale-105">
+                    檢查答案
+                </button>
+                <button type="button" onclick="resetForm()" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg shadow-lg transform transition duration-200 hover:scale-105">
+                    重設
+                </button>
+            </div>
+            <p id="result-message" class="text-center mt-4 text-xl font-bold"></p>
+        </form>
+
+        <!-- 知識點與解答區塊 -->
+        <section class="mt-12">
+            <button id="toggle-answer-key" class="w-full text-left p-4 bg-gray-700 hover:bg-gray-600 rounded-lg text-lg font-bold flex justify-between items-center transition duration-200 shadow-xl" onclick="toggleAnswerKey()">
+                <span>📌 點擊顯示知識點與模擬題組解答</span>
+                <span id="toggle-icon">▼</span>
+            </button>
+
+            <div id="answer-key-content" class="bg-gray-800 rounded-b-xl border border-t-0 border-gray-700 text-gray-300 p-6">
+                <h3 class="text-xl font-bold mb-4 text-red-400">知識點解析</h3>
+                <ul class="list-disc list-inside space-y-3 pl-4">
+                    <li><strong class="text-yellow-400">主題模擬：</strong> 模擬自魏晉人「感慨人生短暫、珍惜友情」的書信文風，例如曹丕的《與吳質書》即是此類。</li>
+                    <li><strong class="text-yellow-400">涉及典故：</strong>
+                        <ul>
+                            <li class="ml-4">「<span class="text-blue-300">高山流水</span>」：比喻知音難遇，難以尋得同心之人。</li>
+                            <li class="ml-4">「<span class="text-blue-300">秉燭夜遊</span>」：源於古人感慨人生短促，勸人及時行樂，與知己相聚的意涵。</li>
+                        </ul>
+                    </li>
+                    <li><strong class="text-yellow-400">難易度評分：</strong> 3/5（中等，偏向理解文意與成語運用）。</li>
+                </ul>
+
+                <hr class="my-6 border-gray-600">
+
+                <h3 class="text-xl font-bold mb-4 text-red-400">模擬題組解答與分析</h3>
+                <div class="space-y-5">
+                    <div>
+                        <p class="font-semibold text-lg text-white">第1題：關於「志在高山流水，欲與知己同聲共鳴」，最符合的成語是：</p>
+                        <p class="mt-1"><strong class="text-green-400">✅ 正解 → (A) 琴瑟和鳴</strong></p>
+                        <p class="text-sm text-gray-400 pl-3">「高山流水」比喻知音難遇。題幹語意是希望找到能同心共鳴的朋友。「<strong class="text-green-400">琴瑟和鳴</strong>」比喻友誼或夫妻情感融洽，最貼合「同聲共鳴」之意。(C) <strong class="text-red-400">曲高和寡</strong> 意指太高雅而少人理解，語意不合。</p>
+                    </div>
+
+                    <div>
+                        <p class="font-semibold text-lg text-white">第2題：「今見朝廷浮華，世人逐利，心知難與同調」最能表達其心境的選項是：</p>
+                        <p class="mt-1"><strong class="text-green-400">✅ 正解 → (A) 慨嘆世風日下，難得真誠之交</strong></p>
+                        <p class="text-sm text-gray-400 pl-3">此句表達的是一種對「朝廷浮華」、「世人逐利」的鄙棄與無奈，感慨世道人心衰落，故難以尋得真誠的同道之人。</p>
+                    </div>
+
+                    <div>
+                        <p class="font-semibold text-lg text-white">第3題：本文最核心的主旨應是：</p>
+                        <p class="mt-1"><strong class="text-green-400">✅ 正解 → (D) 講述友情可貴，勝於功名</strong></p>
+                        <p class="text-sm text-gray-400 pl-3">文章開頭雖感嘆仕途（未逢伯樂），但轉折在於「雖然，若能秉燭夜遊，與良朋對酒言詩，斯亦足慰平生矣。」顯示在功名與友情之間，更珍視與知己相聚的時光，故主旨是友情可貴。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        const correctAnswers = {
+            q1: 'A',
+            q2: 'A',
+            q3: 'D'
+        };
+
+        const resultMessage = document.getElementById('result-message');
+
+        function checkAnswers() {
+            let correctCount = 0;
+            let totalQuestions = 0;
+            const form = document.getElementById('quiz-form');
+
+            // 重設樣式
+            document.querySelectorAll('.question-block').forEach(block => {
+                block.classList.remove('border-red-500', 'border-green-500', 'border-4');
+            });
+            document.querySelectorAll('.radio-label').forEach(label => {
+                label.classList.remove('bg-green-700', 'bg-red-700', 'bg-green-800', 'text-white');
+                label.classList.add('text-gray-300'); // 確保恢復原色
+            });
+
+            for (const q in correctAnswers) {
+                totalQuestions++;
+                const correctAnswer = correctAnswers[q];
+                const selected = form.querySelector(`input[name="${q}"]:checked`);
+                const questionBlock = form.querySelector(`.question-block:has(input[name="${q}"])`);
+
+                if (!selected) {
+                    questionBlock.classList.add('border-4', 'border-gray-500'); // 未選取標示
+                    continue;
+                }
+
+                const selectedValue = selected.value;
+                const selectedLabel = selected.closest('.radio-label');
+
+                if (selectedValue === correctAnswer) {
+                    correctCount++;
+                    questionBlock.classList.add('border-4', 'border-green-500');
+                    selectedLabel.classList.add('bg-green-700', 'text-white');
+                } else {
+                    questionBlock.classList.add('border-4', 'border-red-500');
+                    selectedLabel.classList.add('bg-red-700', 'text-white');
+
+                    // 標示正確答案
+                    const correctLabel = form.querySelector(`input[name="${q}"][value="${correctAnswer}"]`).closest('.radio-label');
+                    correctLabel.classList.add('bg-green-800', 'text-white');
+                }
+            }
+
+            if (totalQuestions === 0) return;
+
+            const percentage = (correctCount / totalQuestions) * 100;
+            if (percentage === 100) {
+                resultMessage.innerHTML = `<span class="text-green-400">💯 恭喜！全部答對了（${correctCount}/${totalQuestions}）！</span>`;
+            } else {
+                resultMessage.innerHTML = `<span class="text-yellow-400">💡 答對了 ${correctCount} 題 (共 ${totalQuestions} 題)。請檢查標註紅色邊框的題目。</span>`;
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('quiz-form').reset();
+            resultMessage.textContent = '';
+            // 清除樣式
+            document.querySelectorAll('.question-block').forEach(block => {
+                block.classList.remove('border-red-500', 'border-green-500', 'border-4', 'border-gray-500');
+            });
+            document.querySelectorAll('.radio-label').forEach(label => {
+                label.classList.remove('bg-green-700', 'bg-red-700', 'bg-green-800', 'text-white');
+                label.classList.add('text-gray-300');
+            });
+        }
+
+        function toggleAnswerKey() {
+            const content = document.getElementById('answer-key-content');
+            const icon = document.getElementById('toggle-icon');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('expanded');
+                icon.textContent = '▲';
+            }
+        }
+    </script>
+</body>
+</html>
